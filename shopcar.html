@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>华为 - 购物车</title>
+<link rel="icon" href="himg/huaweilogo.ico">
+<meta name="twitter:image" content="himg/logo_400x200.png"/>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!--jQuery(necessary for Bootstrap's JavaScript plugins)-->
+<script src="js/jquery-1.11.0.min.js"></script>
+<!--Custom-Theme-files-->
+<!--theme-style-->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Luxury Watches Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--start-menu-->
+<script src="js/simpleCart.min.js"> </script>
+<link href="css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/memenu.js"></script>
+<script>$(document).ready(function(){$(".memenu").memenu();});</script>	
+<!--dropdown-->
+<script src="js/jquery.easydropdown.js"></script>			
+</head>
+<style type="text/css">
+	span.cost,span.xz,span.name{
+	    font-size: 1.4em !important;
+	    margin-top: 2.3em !important;
+		text-align: center !important;
+	}
+	li{
+		text-align: center !important;
+	}
+	li>a>img{
+		display: inline!important;
+	}
+	.information h3{
+		text-align: center;
+	}
+	.calc{
+		overflow: hidden;
+		line-height: 40px;
+	}
+	.calc>div{
+		float: right;
+		margin-left: 20px;
+		font-size: 25px;
+	}
+	.calc>div>button{
+		background: orange;
+		color: white;
+		border: none;
+		width: 120px;
+		height: 40px;
+	}
+	.calc>div>button:focus{
+		outline: none;
+	}
+	.calc>.mone_left{
+		font-weight: bold;
+	}
+	#summoney{
+		color: red;
+	}
+	ul.unit li,ul.cart-header li,ul.cart-header2 li,ul.cart-header1 li {
+		width: 20%;
+	}
+	span.count{
+		text-align: center !important;
+	}
+	.shuliang{
+		margin: 0 10px;
+		color: black;
+	}
+	.cost>a{
+		color: black;
+	}
+	.cost>a:hover{
+		text-decoration: none;
+	}
+	#qrCode{
+		width: 450px;
+		position: absolute;
+		box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+		top: 90%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		z-index: 999;
+		display: none;
+	}
+	#qrCode>p{
+		font-size: 45px;
+		text-align: center;
+	}
+</style>
+<body> 
+<div id="qrCode">
+	<img src="himg/ewm.jpg" style="width: 450px;">
+	<p>￥<span>0</span></p>
+</div>
+	<!--top-header-->
+	<div class="top-header">
+		<div class="container">
+			<div class="top-header-main">
+				<div class="col-md-6 top-header-left">
+					<div class="drop">
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="col-md-6 top-header-left">
+					<div class="box1" style="float: right;">
+						<select tabindex="4" class="dropdown">
+							<option value="" class="label">语言 :</option>
+							<option value="1">中文</option>
+							<option value="2">English</option>
+							<option value="3">しろうと</option>
+							<option value="4">한글</option>
+						</select>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!--top-header-->
+	<!--start-logo-->
+	<div class="logo">
+		<h1 style="font-size: 52px;margin-bottom: 20px;"><a href="index.html" style="position: absolute;
+		left: 60px;"><img src="himg/huawei_logo.png" style="width: 220px;vertical-align: initial;"></a>购 物 车</h1>
+	</div>
+	<!--start-logo-->
+	<!--bottom-header-->
+	<!--bottom-header-->
+	<!--start-breadcrumbs-->
+	<!--end-breadcrumbs-->
+	<!--start-ckeckout-->
+	<div class="ckeckout">
+		<div class="container">
+	<!-- 		<div class="ckeck-top heading">
+				<h2>CHECKOUT</h2>
+			</div> -->
+			<div class="ckeckout-top">
+			<div class="cart-items">
+			 <h3>我的购物袋 ( <span id="bagcount">0</span> )</h3>
+				
+			<div class="in-check" >
+				<ul class="unit">
+					<li><span>商品</span></li>
+					<li><span>名称</span></li>		
+					<li><span>单价</span></li>
+					<li><span>数量</span></li>
+					<li><span>选择</span></li>
+					<li> </li>
+					<div class="clearfix"> </div>
+				</ul>
+
+				<script type="text/javascript">
+					window.onload=function(){
+						var shopItems = [];
+						var item = JSON.parse(localStorage.getItem("computer"));
+						var item1 = JSON.parse(localStorage.getItem("phone"));
+						var item2 = JSON.parse(localStorage.getItem("watch"));
+						if (item!=null) {
+							shopItems.push(item);
+						}
+						if (item1!=null) {
+							shopItems.push(item1);
+						}
+						if (item2!=null) {
+							shopItems.push(item2);
+						}
+						if (shopItems.length==0) {
+							var $ul=$("<div style='font-size: 52px;text-align: center;height: 400px;line-height: 400px;color: orangered;font-weight: bold;'>您 的 购 物 车 空 空 如 也，快 去 选 购 吧！</div>");
+							$(".in-check").append($ul);
+						}
+						$("#bagcount").text(shopItems.length);
+						for (var i = 0;i<shopItems.length;i++) {
+							var $ul=$("<ul class='cart-header'>"+
+								"<a class='close1'></a>"+
+									"<li class='ring-in' style='line-height: 150px;'><a href='#' ><img src='"+shopItems[i].src+"' class='img-responsive'></a></li>"+
+									"<li style='line-height: 123px;'><span class='name'>"+shopItems[i].name+"</span></li>"+
+									"<li style='line-height: 123px;'><span class='cost'>￥<a class='pic'>"+shopItems[i].money+"</a>.00</span></li>"+
+									"<li style='margin: 4.1em 0 0;'><span class='count'><button class='redc'>-</button><a href='#' class='shuliang'>1</a><button class='add'>+</button></span></li>"+
+									"<li style='line-height: 123px;'><span class='xz'><input type='checkbox' class='check'/></span></li>"+
+								"<div class='clearfix'></div>"+
+								+"</ul>");
+							$(".in-check").append($ul);
+						}
+						$(".add").click(function() {
+							let num =parseInt($(this).siblings("a").text())+1;
+							$(this).siblings("a").text(num);
+							sumMoney();
+						});
+						$(".redc").click(function() {
+							let num =parseInt($(this).siblings("a").text())-1;
+							if (num<=0) {
+								num = 0;
+								$(this).parents("ul").find("input[type='checkbox']").prop("checked",false);
+								$(this).prop("disabled",true);
+							}
+							$(this).siblings("a").text(num);
+							$(this).prop("disabled",false);
+							sumMoney();
+						});
+						$('.check').click(function() {
+							sumMoney();
+						});
+						$(".close1").click(function() {
+							let name = $(this).parents('.cart-header').find(".name").text();
+							switch (name){
+								case 'MateBook X Pro':
+									localStorage.removeItem('computer');
+									break;
+								case 'Mate 30 RS 保时捷':
+									localStorage.removeItem('phone');
+									break;
+								case 'WATCH GT 2':
+									localStorage.removeItem('watch');
+									break;
+								default:
+									break;
+							}
+							$(this).parents('.cart-header').fadeOut(1000).remove();
+							sumMoney();
+							var len = $('.cart-header');
+							$("#bagcount").text(len.length);
+ 							if (len.length == 0) {
+								var $ul=$("<div style='font-size: 52px;text-align: center;height: 400px;line-height: 400px;color: orangered;font-weight: bold;'>您 的 购 物 车 空 空 如 也，快 去 选 购 吧！</div>");
+								$(".in-check").append($ul);
+							}
+						});
+						function sumMoney() {
+							var total = 0;
+							$(".check").each(function(){
+								if($(this).prop("checked")==true){
+									let num = parseInt($(this).parents("ul").find(".shuliang").text());
+									let pic = parseInt($(this).parents("ul").find(".pic").text());
+									total += num*pic;
+								}
+							});
+							$("#summoney").text(total);
+						}
+						
+						// 展示二维码
+						$("#account").click(function() {
+							$("#qrCode>p>span").text($("#summoney").text());
+							$("#qrCode").fadeIn(3000).css("display","block");
+						})
+						// 隐藏二维码
+						$("body").click(function(e){
+						  	if($(e.target).closest("#qrCode").length!=0){
+								$("#qrCode").hide(3000);
+						  	}
+						});
+					}
+				</script>
+			</div>
+			
+			<div class="calc">
+				<div class="mone_left">
+					<button id="account">结算</button>
+				</div>
+				<div class="mone_right">
+					总价格：<span style="color: red;">￥</span>
+					<span id="summoney">0</span>
+				</div>
+			</div>  
+			
+			
+		 </div>
+		</div>
+	</div>
+	</div>
+	<!--end-ckeckout-->
+	<!--information-starts-->
+	<div class="information">
+		<div class="container">
+			<div class="infor-top">
+				<div class="col-md-3 infor-left">
+					<h3>关于华为</h3>
+					<ul>
+						<li><a href="#"><p>公司简介</p></a></li>
+						<li><a href="#"><p>公司年报</p></a></li>
+						<li><a href="#"><p>公司治理</p></a></li>
+						<li><a href="#"><p>招纳贤士</p></a></li>
+						<li><a href="#"><p>联系我们</p></a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 infor-left">
+					<h3>新闻与活动</h3>
+					<ul>
+						<li><a href="#"><p>新闻</p></a></li>
+						<li><a href="#"><p>展会活动</p></a></li>
+						<li><a href="#"><p></p></a></li>
+						<li><a href="#"><p>信息中心</p></a></li>
+						<li><a href="contact.html"><p>华为直播</p></a></li>
+						<li><a href="#"><p>媒体图库</p></a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 infor-left">
+					<h3>我们的产品</h3>
+					<ul>
+						<li><a href="#"><p>个人及家庭产品</p></a></li>
+						<li><a href="#"><p>企业业务产品</p></a></li>
+						<li><a href="#"><p>运营商网络产品</p></a></li>
+						<li><a href="#"><p>华为云服务</p></a></li>
+						<li><a href="#"><p>人工与智能</p></a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 infor-left">
+					<h3>技术支持</h3>
+					<ul>
+						<li><a href="#"><p>消费者技术支持</p></a></li>
+						<li><a href="#"><p>华为云技术支持</p></a></li>
+						<li><a href="#"><p>企业技术支持</p></a></li>
+						<li><a href="#"><p>运营商技术支持</p></a></li>
+						<li><a href="#"><p>产品安全通告</p></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--footer-end-->	
+</body>
+</html>
